@@ -1,7 +1,7 @@
 # CMOS Circuit Design and SPICE Simulations using Sky130
-## **Module 1: Basics of NMOS Drain current(Id) vs Drain to source voltage(Vds)**
+## Module 1: Basics of NMOS Drain current(Id) vs Drain to source voltage(Vds)
 
-## ** Introduction to Circuit Design and SPICE simulations**
+##  Introduction to Circuit Design and SPICE simulations
 ### Lecture 1 : Why do we need SPICE simulations?
  **Circuit Design** : 
 All logic gates are constructed by connecting PMOS (p-channel Metal-Oxide-Semiconductor) and NMOS (n-channel Metal-Oxide-Semiconductor) transistors in specific configurations.
