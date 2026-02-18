@@ -53,9 +53,11 @@ The delay tables are derived from circuit-level design and analysis carried out 
 -------------------------------------------------------------------------------------------------
 ### Lecture 2 : Introduction to basic element in Circuit design – NMOS
 #### NMOS
-An N Channel metal oxide semiconductor transistor is a 4 terminal device, built on a P-Substrate.Conversely pmos transistor iis built on n-type substrate. It has two isolation regions one on the left hand and other on the right side. This isolation regions are actually used to differentiate between two different transistors.n+ diffusion region called as source terminal and drain terminal.
-Gate oxide placed over the p substrate
-polisilicon or metal gate is placed over the gate oxide and this forms the gate terminal .
+An NMOS (n-channel metal-oxide-semiconductor) transistor is a key active device in CMOS design. Its main features include:
+A p-type substrate that forms the base material.
+Two heavily doped n⁺ regions which act as the Source and Drain terminals.
+A thin insulating oxide layer between the semiconductor and a gate terminal.
+The Gate terminal controls the flow of current between the source and drain when voltage is applied.
 ## NMOS Transistor Structure Explanation
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/8ce145e7-62ce-4a3b-b694-a3b35178a820" />
 
@@ -105,20 +107,13 @@ This image shows the cross-sectional structure of an NMOS (n-channel Metal-Oxide
 
 The NMOS transistor has four terminals:
 
-1. **G (Gate)**
-   - Voltage applied here controls transistor operation
+1. **G (Gate)**- Voltage applied here controls transistor operation
 
-2. **S (Source)**
-   - Acts as the source of charge carriers (electrons)
-   - Connected to ground (GND) or lower potential
+2. **S (Source)** - Acts as the source of charge carriers (electrons), connected to ground (GND) or lower potential
 
-3. **D (Drain)**
-   - Acts as the destination for charge carriers
-   - Connected to higher potential or intermediate voltages
+3. **D (Drain)** - Acts as the destination for charge carriers - connected to higher potential or intermediate voltages
 
-4. **B (Body)**
-   - Controls the substrate voltage
-   - Affects the threshold voltage of the transistor
+4. **B (Body)** - Controls the substrate voltage - affects the threshold voltage of the transistor
    ## Quick Summary
 
 | Component | Purpose |
@@ -130,54 +125,71 @@ The NMOS transistor has four terminals:
 | n+ Diffusion (Drain) | Charge carrier exit point |
 | SiO2 Isolation | Prevents leakage |
 | Channel | Conducting path when gate voltage is applied |
-## Threshold Voltage
-#### NMOS Transistor – Physical Operation Explanation
-The figures illustrate the internal structure and operation of an NMOS transistor fabricated on a p-type substrate with n+ source and drain regions and a gate separated by a thin oxide layer.
+
+### Physical Explanation of Operation
 #### 1. NMOS Structure (Initial Condition)
+When the gate–source voltage (VGS) is 0 V:
+
+No channel exists between source and drain.
+
+The NMOS acts like an open switch — no current flows.
+
+The body (substrate), source, and drain are at the same potential.
+
 <img width="500" height="500" alt="Screenshot 2026-02-17 234828" src="https://github.com/user-attachments/assets/89851dc6-8b04-46bc-a658-8dece1825544" />
 
-- The NMOS is built on a p-type substrate.
-- Source (S) and Drain (D) are heavily doped n+ regions.
-- The gate (G) is insulated from the substrate by a thin SiO₂ layer.
-- The body (B) is connected to ground (GND).
-- At this stage : VGS = 0
-- No conductive channel exists between source and drain.
-- Source–body and drain–body junctions form reverse-biased p–n junctions.
-- The transistor is in the OFF state.
-
 #### 2. Application of Positive Gate Voltage (Charge Accumulation)
-<img width="500" height="500" alt="Screenshot 2026-02-17 234057" src="https://github.com/user-attachments/assets/14d645fa-b947-4317-bde8-72e4755f7795" />
+As Vgs increases positively:
 
-When a positive voltage is applied to the gate (VGS > 0):
-- Positive charge accumulates on the gate electrode.
-- An electric field is created across the gate oxide.
-- This field repels holes (positive carriers) from the substrate surface.
-- Electrons (negative charge carriers) are attracted toward the oxide–substrate interface.
-- This results in:Formation of a depletion region below the gate.
-- Accumulation of electrons near the surface, as shown in the figure.
+Negative charges (electrons) accumulate near the channel region under the gate.
 
-#### 3. Channel Formation (Inversion)
+A depletion region forms under the gate as majority carriers are repelled.
+
 <img width="500" height="500" alt="Screenshot 2026-02-17 234118" src="https://github.com/user-attachments/assets/b09fe343-af5f-43f0-9c3f-652090f8e218" />
-As VGS increases beyond the threshold voltage (VTH):
-- The electron concentration at the surface exceeds the hole concentration.
-- The surface region of the p-substrate becomes inverted to n-type.
-- A continuous n-type channel is formed between source and drain.
-- At this point:
-- The NMOS transistor turns ON.
-- A conductive path exists between source and drain.
 
-#### 4. Current Flow (ON State)
-<img width="500" height="500" alt="Screenshot 2026-02-17 234143" src="https://github.com/user-attachments/assets/fd17d325-584c-44ae-b206-278429c35840" />
+When the gate-to-source voltage (VGS) increases and reaches the threshold voltage (VTH), significant changes occur at the semiconductor surface. The applied positive gate voltage attracts electrons toward the oxide–semiconductor interface. As a result, the concentration of electrons at the surface becomes greater than the concentration of holes in the p-type substrate.
+This condition causes the surface region beneath the gate to change from p-type to effectively n-type — a process known as inversion. Once sufficient electrons accumulate, a continuous n-type channel forms between the source and drain terminals.
+The formation of this channel marks the point at which the NMOS transistor turns ON, allowing current to flow between the drain and source when a drain voltage is applied.
+The gate voltage at which this conducting channel is first established is called the threshold voltage (Vt). It represents the minimum gate voltage required for conduction to begin.
 
-- With:VGS > VTH
-- Drain at a higher potential than source
-- Electrons flow:From source → channel → drain
-- Conventional current flows from drain to source.
-- The drain current is controlled by:
- - Gate-to-source voltage (VGS)
- - Drain-to-source voltage (VDS)
+<img width="500" height="500" alt="Screenshot 2026-02-17 234143" src="https://github.com/user-attachments/assets/ce4c5b0e-990d-4969-b40d-d8d9866a12af" />
+
 ---------------------------------------------------
-### lecture
-by increasing the gate voltage we observe that positive charges get repelled and depletion region increases.
+### lecture 3
+By increasing the gate voltage further we observe that positive charges get repelled and depletion region width increases further.
+we can see that a portion of p substrate inverted into n type this is called as surface inversion or strong inversion.The voltage where strong inversion occurs is called threshold voltage.
+by increasing voltage further we see that there is no way it finds a ppositive charged particles.
+now this n+ heavily doped region will start attracting negive chrge particles from n+ source area .
+the chanel width increases
 
+What Happens as VGS Increases
+
+When VGS is low, the surface of the p-type substrate has mostly positive carriers (holes), so there is no path for electrons between the source and drain — the transistor remains OFF.
+
+As VGS increases, the electric field from the gate repels holes away from the surface and creates a depletion region. More gate voltage strengthens this field.
+
+At a certain VGS, enough electrons are pulled toward the surface so that they outnumber the holes. This flips the surface from p-type to n-type — a condition called strong inversion.
+
+Forming the Conductive Channel
+
+Once strong inversion occurs:
+
+A continuous layer of electrons forms under the gate between the source and drain.
+
+This n-type region acts as a low-resistance path.
+
+The transistor switches ON and can conduct current when a drain voltage is applied.
+
+ Threshold Voltage (Vt)
+
+The threshold voltage is defined as the value of VGS at which strong inversion first occurs and a conducting channel starts to form. Below Vt, the MOSFET remains off; above Vt, the channel begins to support current flow.
+
+ Key Points
+
+Strong inversion means the surface under the gate behaves like n-type material.
+
+Threshold voltage is the minimum gate voltage needed to induce this inversion.
+
+Increasing VGS beyond Vt strengthens the channel by attracting more electrons, increasing conductivity.
+ 
 
