@@ -176,5 +176,8 @@ As VGS increases beyond the threshold voltage (VTH):
 - The drain current is controlled by:
  - Gate-to-source voltage (VGS)
  - Drain-to-source voltage (VDS)
+---------------------------------------------------
+### lecture
+by increasing the gate voltage we observe that positive charges get repelled and depletion region increases.
 
 
