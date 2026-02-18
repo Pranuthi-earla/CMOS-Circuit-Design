@@ -130,66 +130,62 @@ The NMOS transistor has four terminals:
 #### 1. NMOS Structure (Initial Condition)
 When the gate–source voltage (VGS) is 0 V:
 
-No channel exists between source and drain.
+- No channel exists between source and drain.
 
-The NMOS acts like an open switch — no current flows.
+- The NMOS acts like an open switch — no current flows.
 
-The body (substrate), source, and drain are at the same potential.
+- The body (substrate), source, and drain are at the same potential.
 
 <img width="500" height="500" alt="Screenshot 2026-02-17 234828" src="https://github.com/user-attachments/assets/89851dc6-8b04-46bc-a658-8dece1825544" />
 
 #### 2. Application of Positive Gate Voltage (Charge Accumulation)
 As Vgs increases positively:
 
-Negative charges (electrons) accumulate near the channel region under the gate.
+- Negative charges (electrons) accumulate near the channel region under the gate.
 
-A depletion region forms under the gate as majority carriers are repelled.
+- A depletion region forms under the gate as majority carriers are repelled.
 
 <img width="500" height="500" alt="Screenshot 2026-02-17 234118" src="https://github.com/user-attachments/assets/b09fe343-af5f-43f0-9c3f-652090f8e218" />
 
-When the gate-to-source voltage (VGS) increases and reaches the threshold voltage (VTH), significant changes occur at the semiconductor surface. The applied positive gate voltage attracts electrons toward the oxide–semiconductor interface. As a result, the concentration of electrons at the surface becomes greater than the concentration of holes in the p-type substrate.
-This condition causes the surface region beneath the gate to change from p-type to effectively n-type — a process known as inversion. Once sufficient electrons accumulate, a continuous n-type channel forms between the source and drain terminals.
-The formation of this channel marks the point at which the NMOS transistor turns ON, allowing current to flow between the drain and source when a drain voltage is applied.
-The gate voltage at which this conducting channel is first established is called the threshold voltage (Vt). It represents the minimum gate voltage required for conduction to begin.
+- When **VGS reaches the threshold voltage (VTH)**, electrons are attracted to the oxide–semiconductor interface, increasing their concentration at the surface.
+
+- The surface region inverts from p-type to n-type (strong inversion), forming a continuous n-type channel between source and drain.
+
+- This channel formation turns the **NMOS transistor ON**, and the threshold voltage (Vt) is the minimum gate voltage required for conduction to begin.
 
 <img width="500" height="500" alt="Screenshot 2026-02-17 234143" src="https://github.com/user-attachments/assets/ce4c5b0e-990d-4969-b40d-d8d9866a12af" />
 
 ---------------------------------------------------
-### lecture 3
-By increasing the gate voltage further we observe that positive charges get repelled and depletion region width increases further.
-we can see that a portion of p substrate inverted into n type this is called as surface inversion or strong inversion.The voltage where strong inversion occurs is called threshold voltage.
-by increasing voltage further we see that there is no way it finds a ppositive charged particles.
-now this n+ heavily doped region will start attracting negive chrge particles from n+ source area .
-the chanel width increases
+### Lecture 3: Strong Inversion
 
-What Happens as VGS Increases
+- As the gate voltage increases, holes in the p-substrate are repelled, widening the depletion region beneath the gate.
 
-When VGS is low, the surface of the p-type substrate has mostly positive carriers (holes), so there is no path for electrons between the source and drain — the transistor remains OFF.
+- At a certain voltage, the surface region inverts from p-type to n-type — this condition is called **strong inversion**, and the corresponding voltage is the **threshold voltage (Vt)**.
 
-As VGS increases, the electric field from the gate repels holes away from the surface and creates a depletion region. More gate voltage strengthens this field.
+- Beyond this point, electrons from the n+ source accumulate to form and widen the conducting channel between source and drain, allowing current flow.
 
-At a certain VGS, enough electrons are pulled toward the surface so that they outnumber the holes. This flips the surface from p-type to n-type — a condition called strong inversion.
+<img width="574" height="287" alt="Screenshot 2026-02-18 164946" src="https://github.com/user-attachments/assets/78ba210f-ef39-4873-941d-912489662a35" />
 
-Forming the Conductive Channel
+- When VGS is low, the surface of the p-type substrate has mostly positive carriers (holes), so there is no path for electrons between the source and drain — the transistor remains OFF.
+
+- As VGS increases, the electric field from the gate repels holes away from the surface and creates a depletion region. More gate voltage strengthens this field.
+
+- At a certain VGS, enough electrons are pulled toward the surface so that they outnumber the holes. This flips the surface from p-type to n-type — a condition called strong inversion.
+
+**Forming the Conductive Channel**
+
+<img width="869" height="412" alt="Screenshot 2026-02-18 165322" src="https://github.com/user-attachments/assets/08db6aa6-23b8-4888-bbc7-f2b8a27b5161" />
 
 Once strong inversion occurs:
 
-A continuous layer of electrons forms under the gate between the source and drain.
+- A continuous layer of electrons forms under the gate between the source and drain.
 
-This n-type region acts as a low-resistance path.
+- This n-type region acts as a low-resistance path.
 
-The transistor switches ON and can conduct current when a drain voltage is applied.
+- The transistor switches ON and can conduct current when a drain voltage is applied.
 
- Threshold Voltage (Vt)
+**Threshold Voltage (Vt)**
 
-The threshold voltage is defined as the value of VGS at which strong inversion first occurs and a conducting channel starts to form. Below Vt, the MOSFET remains off; above Vt, the channel begins to support current flow.
+The threshold voltage is defined as the value of VGS at which strong inversion first occurs and a conducting channel starts to form. Below Vt, the transistor remains off; above Vt, the channel begins to support current flow.
 
- Key Points
-
-Strong inversion means the surface under the gate behaves like n-type material.
-
-Threshold voltage is the minimum gate voltage needed to induce this inversion.
-
-Increasing VGS beyond Vt strengthens the channel by attracting more electrons, increasing conductivity.
- 
 
