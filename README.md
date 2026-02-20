@@ -188,4 +188,51 @@ Once strong inversion occurs:
 
 The threshold voltage is defined as the value of VGS at which strong inversion first occurs and a conducting channel starts to form. Below Vt, the transistor remains off; above Vt, the channel begins to support current flow.
 
+### Lecture 4: Threshold voltage with positive substrate potential
+
+When the substrate-to-source voltage is **VSB = 0**
+- The semiconductor surface undergoes **inversion to n-type** when the gate-to-source voltage reaches the **threshold voltage VTO**.
+Here, VTO is defined as the threshold voltage at which surface inversion occurs in the absence of any substrate bias.
+
+<img width="410" height="381" alt="Screenshot 2026-02-20 095818" src="https://github.com/user-attachments/assets/2116b3a9-1274-4508-ae18-08ea257ad2fe" />
+
+When a **positive substrate-to-source voltage (VSB > 0)** is applied, the depletion region beneath the gate **widens** as the gate-to-source voltage increases. This occurs because the reverse-biased source–substrate junction attracts **negative charge carriers toward the source**, increasing the depletion charge in the substrate.
+
+<img width="469" height="371" alt="Screenshot 2026-02-20 100004" src="https://github.com/user-attachments/assets/37b480e7-d2a6-42b5-854e-24a168f5dcc9" />
+
+Due to this additional depletion charge caused by the substrate bias, a **higher gate-to-source voltage** is required to achieve strong inversion. As a result, the threshold condition shifts to:
+
+<img width="212" height="63" alt="Screenshot 2026-02-20 104659" src="https://github.com/user-attachments/assets/458401f7-8834-4dad-a829-bcb437907c32" />
+
+where **V₁** represents the extra voltage needed to overcome the body-bias effect, as indicated in the figure.
+
+
+### Threshold Voltage Expression with Body Effect
+
+The threshold voltage in the presence of substrate bias is given by:
+
+<img width="505" height="88" alt="Screenshot 2026-02-20 102230" src="https://github.com/user-attachments/assets/597e8221-f020-4b3b-899a-18a36fd02c24" />
+
+- Where
+   - V_to= Threshold voltage at V_sb=0, and is a function of manufacturing process
+   - γ= body effect coefficient, expresses the impact of changes in body bias V_sb(Unit is V^0.5)
+   - ϕ_f= Fermi Potential
+   
+<img width="198" height="116" alt="Screenshot 2026-02-20 102242" src="https://github.com/user-attachments/assets/ab84e277-f06c-4e10-8af4-3f205406e244" />
+
+- Parameters
+   - ε_si= relative permittivity of silicon = 11.7
+   - N_A= doping concentration
+   - q= charge of the electron
+   - C_ox= oxide capacitance
+- Fermi Potential
+
+   <img width="286" height="125" alt="Screenshot 2026-02-20 102255" src="https://github.com/user-attachments/assets/9064d335-95bc-4ddb-aef2-962b9cbc6f0a" />
+
+- Where
+   - n<sub>i</sub>  = intrinsic doping parameter for the substrate
+- All these parameters are provided to the SPICE simulation tool, which computes the effective threshold voltage. The calculated VTH accurately represents the electrical behavior of the MOS device under the given biasing conditions.
+
+
+
 
