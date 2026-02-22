@@ -51,7 +51,7 @@ Assume that clock tree synthesis has been performed for the circuit shown below,
 4. Read the delay value: **9 ps**
 The delay tables are derived from circuit-level design and analysis carried out using SPICE simulations. These simulations are used to characterize the timing behavior of CMOS logic circuits under various operating conditions.
 -------------------------------------------------------------------------------------------------
-### Lecture 2 : Introduction to basic element in Circuit design – NMOS
+### 1.Lecture 2 : Introduction to basic element in Circuit design – NMOS
 #### NMOS
 An NMOS (n-channel metal-oxide-semiconductor) transistor is a key active device in CMOS design. Its main features include:
 A p-type substrate that forms the base material.
@@ -156,7 +156,7 @@ As Vgs increases positively:
 <img width="500" height="500" alt="Screenshot 2026-02-17 234143" src="https://github.com/user-attachments/assets/ce4c5b0e-990d-4969-b40d-d8d9866a12af" />
 
 ---------------------------------------------------
-### Lecture 3: Strong Inversion
+### 2.Lecture 3: Strong Inversion
 
 - As the gate voltage increases, holes in the p-substrate are repelled, widening the depletion region beneath the gate.
 
@@ -188,7 +188,7 @@ Once strong inversion occurs:
 
 The threshold voltage is defined as the value of VGS at which strong inversion first occurs and a conducting channel starts to form. Below Vt, the transistor remains off; above Vt, the channel begins to support current flow.
 
-### Lecture 4: Threshold voltage with positive substrate potential
+### 3.Lecture 4: Threshold voltage with positive substrate potential
 
 When the substrate-to-source voltage is **VSB = 0**
 - The semiconductor surface undergoes **inversion to n-type** when the gate-to-source voltage reaches the **threshold voltage VTO**.
@@ -232,7 +232,100 @@ The threshold voltage in the presence of substrate bias is given by:
 - Where
    - n<sub>i</sub>  = intrinsic doping parameter for the substrate
 - All these parameters are provided to the SPICE simulation tool, which computes the effective threshold voltage. The calculated VTH accurately represents the electrical behavior of the MOS device under the given biasing conditions.
+-----------------------------------------------------------------
+
+## NMOS resistive region and saturation region of operation
+
+### 4.Lecture 1: Resistive region of operation with small drain-source voltage
+
+- On increasing VGS beyond Vt, the channel charge density increases
+-	Down in the channel, Qi grows steady with every rise of (Vgs - Vt). That leftover push - called overdrive voltage - brings more free electrons into play. More carriers mean a stronger flow at the drain.
+- Starting at 0.45 volts, that's the NMOS threshold voltage. A full volt sits between gate and source. Meanwhile, drain to source sees just 0.05 volts. These values set the operating point. Voltage levels stay fixed like this.
+- Beyond the threshold, voltage switches the transistor on - then a path opens between source and drain. That connection appears because gate potential exceeds critical levels.
+- A voltage difference appears across the channel when the source sits at ground while the drain holds a positive potential. From one end to the other, the electric push shifts steadily where current moves through. With grounding on one side and elevated voltage opposite, an uneven field forms within the path. Where electrons enter low, they exit higher, tracing a slope in between. This tilt in electrical level runs directly because of how each terminal connects.
+- A curve begins on the left, where distance stretches from zero to L - roughly matching effective length. Charge intensity climbs at first, then shifts unevenly across the span. The vertical axis tracks how much charge fills each point along that stretch. Shape dips and rises, not straight, never flat. At every spot, strength ties directly to position. As you move right, the value changes steadily, shaped by physical limits. This picture holds steady throughout the full reach of the channel
+- Without VDS, each spot in the channel experiences identical gate overdrive (VGS − Vt).
+- Starting at the source, where voltage sits at zero, the channel's internal potential shifts gradually toward the drain. This shift follows the full VDS value by the time it reaches the far end. Voltage here isn't fixed - it stretches across space. At each point x along the path, the level climbs steadily. What begins as nothing ends exactly at the applied drain voltage.
+- So the useful boost at spot x turns into (VGS - V(x) - Vt), showing how the charge in the channel fades a bit more from source toward drain.
+
+Measured at fabrication, channel length stands for the set gap from source to drain drawn in layout files. Once production shifts like sideways doping occur, what truly conducts becomes shorter - this real span is effective channel length.
+
+### 5.Lecture 2: Drift Current 
+
+-	Down in the yellow zone, right where the channel sits, the amount of flipped charge at spot x ties closely to how much extra push the gate voltage gives locally.
+-	Floating across different points, the channel's potential shifts, making the real gate push at spot x equal VGS - V(x). At each place, a unique blend of voltages shapes how things respond. Where you look changes what drives it - VGS weakened by local drop V(x). Not uniform, the pull adjusts steadily from end to end. What matters at x ties back to that momentary gap between supply and local shift.
+-	So the amount of inversion charge at a spot x connects directly to how much extra voltage sits there
+
+-	Think of Cox as how much electric charge the gate oxide can hold for each bit of area. This value shows the strength of the link between gate and channel across the slim insulating layer
+
+-	Electricity moves in different ways. One kind flows steadily without changing direction. The other shifts back and forth many times each second
+-	When an electric field is turned on, it pushes charged particles through a material. This movement forms what we call drift current. Instead of random motion, the charges follow a path shaped by voltage across the ends. The flow keeps going as long as the push stays active. Direction matters here - particles head toward the opposite pole. What counts is how strong the pull feels inside. Not every carrier moves at once, but most join when pulled hard enough.
+-	Where particles spread out because they’re bunched up in one spot, flow happens. This movement shows up when charges drift toward emptier areas. A shift begins simply: too many on one side, too few on the other. Flow follows imbalance, not push from voltage. It creeps where density drops off. Motion kicks in as crowded zones thin into open space. The current appears wherever unevenness leads
+Drift current (Id) = Velocity of charge carriers x Available charge (over the channel width)
+
+### 6.Lecture 3: Drain current model for linear region of operation
 
 
+-	Take kn = unCox. Here, kn stands for the process transconductance. It shows how well the transistor turns gate voltage into current at the drain. The value depends on carrier mobility and oxide capacitance together.
 
+-	Even though the equation stays quadratic, after more steps it turns into
 
+-	So long as VDS stays at or below (VGS - Vt), the MOSFET works like a resistor.
+-	Here, the path between source and drain stays unbroken. Voltage at the gate sets how much current flows through.
+
+### 7.Lecture 4: SPICE conclusion to resistive operation
+
+-	A closer look at how VGS and VDS shape the drain current (ID) begins by testing separate voltage levels. Different combinations reveal shifts in current behavior. One value adjusts while the other holds steady. Changes emerge not just from magnitude, but from their interplay. Each setting alters the flow in distinct ways. What matters is how they jointly influence ID across ranges.
+-	When VGS is fixed, the transistor stays in the triode zone provided that VDS stays below the difference between VGS and Vt. What matters here is how much lower VDS sits compared to that threshold gap. As voltage across drain and source drops beneath the gate-to-threshold margin, linear behavior continues uninterrupted. The condition holds only while this imbalance favors smaller VDS values. Once it narrows too far, operation shifts out of triode mode.
+-	A single value of VGS is set first. Following that, VDS begins at zero and increases steadily until reaching (VGS − Vt). For each step in this range, the corresponding drain current gets recorded. This process repeats across various gate-to-source voltages. Measurements unfold point by point through incremental shifts in drain voltage.
+-	Here, current behaves according to a straight-line model. Simulations help check how current changes with voltage at different gate levels. Each step matches expected patterns without deviation.
+
+### 8.Lecture 5: Pinch Off Region Condition
+
+-	At the drain edge, if (VGS − VDS) exceeds Vt, a conducting channel remains present. So long as that condition holds, carriers continue to form under the gate near the drain
+-	Wherever inversion occurs across the channel - from x = 0 at the source to x = L at the drain - a linked conductive route forms between source and drain.
+-	Here, the device works within the linear (triode) range, where rising VDS leads to a roughly proportional boost in drain current when VDS stays low. Though small, these voltage shifts clearly shape current flow across the channel.
+
+-	At the point where (VGS − VDS) reaches Vt, inversion at the surface is just maintained near the drain. The gate-to-channel potential closes to the minimum needed right where the channel meets the drain terminal.
+-	This condition implies the surface near the drain sits exactly where inversion begins - here, the charge density inverts vanishes entirely. Though subtle, the shift marks a threshold; precisely at that location, carriers cease forming an inverted layer.
+-	With the inversion layer vanishing near the drain, the channel stops short of reaching it completely. Such a state earns the name pinch-off.
+-	Once pinched off, the channel vanishes near the drain yet current continues. Reaching that narrow spot, electrons move through the depleted zone into the drain, pulled by intense field forces. Consequently, further rises in VDS fail to push the drain current upward steadily
+
+-	Once VDS goes beyond (VGS - Vt), the MOSFET shifts into saturation. Here, the channel at the drain side loses inversion capability, resulting in a pinched-off zone close to the drain terminal.
+-	Where the channel's own electric influence weakens the gate effect, what remains of the driving force becomes (VGS − V(x)) at each spot. Because V(x) grows when moving from source to drain, less inverted charge appears near the drain edge.
+-	With a continued rise in VDS past (VGS − Vt), the location of pinch-off shifts gradually closer to the source terminal.
+
+### 9.Lecture 6: Drain current model for saturation region of operation
+-	If (VGS - VDS) is less than or equal to Vt, the channel breaks down near the drain
+-	Once saturated, the channel voltage holds steady near (VGS - Vt). Not like in the linear zone, where changes follow V(x). Here, things stay flat instead of shifting along the path
+-	A steady flow sets in when voltage across source and drain stops influencing current. Instead, gate-to-source pressure - threshold level takes control. This happens if we ignore tiny shifts from shrinking paths inside the device
+Id = kn/2 (Vgs-Vt)^2
+
+-	Saturation makes the MOSFET act much like a steady current provider. When fully on, it holds current nearly unchanged. Its behavior shifts - now delivering fixed flow regardless of voltage swings. Once saturated, current stays flat even if conditions shift slightly. The device locks into a stable output under these settings.
+-	Still, the flow isn’t fully untouched by VDS. When VDS goes up, the empty zone near the drain grows wider.
+-	A bit shorter path inside means less resistance. When that path shrinks, more current flows even if voltage stays almost the same. People call this shift by another name - tweaking how far electrons travel changes output just a little
+  
+### 10.Lecture:1 Basic SPICE setup
+
+Starting off, SPICE relies on set-in-stone models to mirror how transistors behave. Circuit pieces show up just right because of these built-in rules. Instead of guessing, it pulls from fixed templates that match real parts closely.
+-	A person gives circuit details using a file called a netlist - this shows each part along with how they link together.
+-	Once SPICE runs, it models the circuit behavior while creating visual outputs alongside numerical results.
+-	From here, timing delays show up clearly. Cells take shape in how they respond. Because of that, tools like Static Timing Analysis gain stronger backing. Performance checks follow similar paths, shaped by what comes before
+
+-	Starting off, values like VTO, kn′, γ, along with λ - shown in brown up there - are locked once the tech node is set. These don’t shift after that point.
+-	Fabrication steps plus how a device behaves shape these values, so folks name them tech constants.
+-	Packed inside the SPICE model file that powers simulations, these come straight from the foundry. They show up where the tool reads its rules, shaped by fabrication details baked in ahead of time.
+-	Starting from the tech specs fed into the system, the simulation begins once the circuit layout is added alongside them. Not until both inputs are loaded does the engine start mapping how each part behaves. Only then can behavior of components be worked out by the software.
+-	Starting at zero, voltage climbs slowly while current gets recorded. Each step in gate voltage paints another line on the graph. Instead of single snapshots, a full picture emerges gradually. With every run, drain current shifts under new pressure. These trails show how channels respond when pushed differently.
+SPICE Netlist:
+
+-	A correct syntax structure is needed so the SPICE engine can process the device description. What matters is matching the expected pattern without deviation. Only when formatted properly does recognition happen inside the system. Anything outside that form stays unreadable to the parser.
+-	The MOSFET comes into view through how its nodes link up - Drain, Gate, Source, and Bulk shaping the setup. Its behavior leans on the width-to-length ratio of these parts. Voltage supplies set the stage by feeding steady biases. Each piece fits without flash, just function.
+-	A look at how the MOSFET behaves electrically comes from its modeled version inside the simulator. Instead of physical parts, it relies on set values that shape responses during operation. What you see drawn is just a representation - what runs underneath follows precise internal rules.
+-	MOSFET has four nodes Drain Gate Source Bulk
+-	A power supply sets VGS and VDS across the transistor, whereas the body connection often links directly to ground in NMOS setups. The source terminal typically anchors to VSS, letting voltage inputs shape the gate and drain conditions through separate supplies. Grounding the base helps stabilize operation, since that node rarely floats during normal use.
+-	A different route is taken by the simulator - it skips mapping the actual shape, relying on number patterns saved in a file to figure out how electricity moves. Instead of copying real-world thickness or width, calculations come from hidden math rules tucked inside that data file.
+-	Into the gate, a resistor steps in to block sharp current jumps. Sudden surges meet resistance before reaching critical parts. This small part slows down fast electrical pushes. It stands guard where power first enters. Quick changes get smoothed by its presence. Protection comes quietly through steady opposition.
+-	Even though no steady current enters the MOSFET gate, its internal capacitance allows brief surges when turning on or off. Because of this, a sudden spike might appear. That's where the resistor helps - it shields both the delicate oxide layer and whatever powers the switch. Without it, stress builds fast.
+
+### 11-Lecture 2: Circuit description in SPICE syntax
