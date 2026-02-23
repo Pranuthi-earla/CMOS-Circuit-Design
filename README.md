@@ -549,7 +549,7 @@ Device Characterization
    ```bash
    cd sky130CircuitDesignWorkshop/design/
    ```
-<img width="1526" height="334" alt="Screenshot 2026-02-23 120554" src="https://github.com/user-attachments/assets/a41d6a45-1b8c-4309-a2fa-d292db45d4a7" />
+
 
 
 5. **List Contents**
@@ -564,6 +564,8 @@ Device Characterization
    cd sky130_fd_pr/
    ls
    ```
+
+<img width="1526" height="334" alt="Screenshot 2026-02-23 120554" src="https://github.com/user-attachments/assets/a41d6a45-1b8c-4309-a2fa-d292db45d4a7" />
 
 
 7. **Enter the Cells Directory**
@@ -586,6 +588,7 @@ Device Characterization
    cd nfet_01v8/
    ls
    ```
+<img width="1510" height="213" alt="image" src="https://github.com/user-attachments/assets/cc2732db-355d-4e40-92a6-c374cc351128" />
 
    You will find multiple files corresponding to different **process corners**:
 
@@ -602,11 +605,15 @@ Viewing the NMOS Model File
    ```bash
    less sky130_fd_pr__nfet_01v8___tt.pm3.spice
    ```
-<img width="1698" height="240" alt="Screenshot 2026-02-23 120624" src="https://github.com/user-attachments/assets/fec3a321-97b3-43ef-9389-588ace2fa225" />
+
+<img width="1509" height="120" alt="image" src="https://github.com/user-attachments/assets/3c83abf3-12d8-42c6-9460-2a72c47dae59" />
 
 
    * This file contains **all NMOS parameters** for the typical process corner.
    * It defines how the device behaves under nominal conditions.
+
+   <img width="1509" height="296" alt="image" src="https://github.com/user-attachments/assets/5e4a4468-3a75-45bc-a111-a9553aeeca03" />
+
 
    **Exit the file** by pressing:
 
@@ -618,11 +625,17 @@ Viewing the NMOS Model File
 
 * Open:
 
-  ```
-  sky130_fd_pr__nfet_01v8___tt.corner.spice
-  ```
+  ```bash
+  less sky130_fd_pr__nfet_01v8___tt.corner.spice
+   ```
+
+<img width="1511" height="796" alt="image" src="https://github.com/user-attachments/assets/c0033835-7e7e-4ae9-9bb7-b4be1da7c5a6" />
+
+  
 * Only specific **W (width)** and **L (length)** values are allowed.
 * Using dimensions outside this list may cause simulation failure.
+
+<img width="1511" height="799" alt="image" src="https://github.com/user-attachments/assets/1216e337-58fd-444b-9f9c-b20a98154ed1" />
 
 
 Model Library Overview
@@ -642,10 +655,13 @@ ls
 * `sky130.lib.spice` contains **all NMOS and PMOS models** across corners.
 
 
-<img width="1259" height="839" alt="Screenshot 2026-02-23 120922" src="https://github.com/user-attachments/assets/1a78e125-e21d-42b3-9db6-575457a22bda" />
+<img width="1247" height="235" alt="image" src="https://github.com/user-attachments/assets/34319629-f44b-4322-8d14-42359f6a65ea" />
 
 
  Running the Simulation
+
+<img width="1510" height="1006" alt="image" src="https://github.com/user-attachments/assets/dc382b16-aa0d-43b9-9401-7a4a5f379055" />
+ 
 
 13. **Return to the Design Directory**
 
@@ -712,6 +728,8 @@ Vin in  0 1.8
 ```bash
 ngspice day1_nfet_idvds_L2_W5.spice
 ```
+<img width="1511" height="716" alt="image" src="https://github.com/user-attachments/assets/a08d3f48-d97d-49a7-9f17-c5b54075ed16" />
+
 
 16. **Plot Drain Current**
 
