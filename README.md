@@ -526,16 +526,20 @@ Device Characterization
 
    * Launch the virtual machine configured for SKY130 simulations.
 
+
 2. **Clone the Workshop Repository**
 
    ```bash
    git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git
    ```
+<img width="1511" height="260" alt="image" src="https://github.com/user-attachments/assets/02af6bff-0c39-4539-935c-a1e1b164e67f" />
+
 
 3. **Verify Project Directory**
 
    * After cloning, a folder named `sky130CircuitDesignWorkshop` appears.
    * This directory contains all configuration-generated project files.
+<img width="914" height="209" alt="Screenshot 2026-02-23 120523" src="https://github.com/user-attachments/assets/a4c74a4c-ae4c-4ba5-95a1-72ec4d44ceda" />
 
 
  Navigating the Design Files
@@ -545,6 +549,8 @@ Device Characterization
    ```bash
    cd sky130CircuitDesignWorkshop/design/
    ```
+<img width="1526" height="334" alt="Screenshot 2026-02-23 120554" src="https://github.com/user-attachments/assets/a41d6a45-1b8c-4309-a2fa-d292db45d4a7" />
+
 
 5. **List Contents**
 
@@ -558,6 +564,7 @@ Device Characterization
    cd sky130_fd_pr/
    ls
    ```
+
 
 7. **Enter the Cells Directory**
 
@@ -595,6 +602,8 @@ Viewing the NMOS Model File
    ```bash
    less sky130_fd_pr__nfet_01v8___tt.pm3.spice
    ```
+<img width="1698" height="240" alt="Screenshot 2026-02-23 120624" src="https://github.com/user-attachments/assets/fec3a321-97b3-43ef-9389-588ace2fa225" />
+
 
    * This file contains **all NMOS parameters** for the typical process corner.
    * It defines how the device behaves under nominal conditions.
@@ -632,6 +641,10 @@ ls
 
 * `sky130.lib.spice` contains **all NMOS and PMOS models** across corners.
 
+
+<img width="1259" height="839" alt="Screenshot 2026-02-23 120922" src="https://github.com/user-attachments/assets/1a78e125-e21d-42b3-9db6-575457a22bda" />
+
+
  Running the Simulation
 
 13. **Return to the Design Directory**
@@ -651,7 +664,7 @@ vim day1_nfet_idvds_L2_W5.spice
 
 ## Library Linking and Corner Selection
 
-* A **green highlighted box** confirms successful inclusion of the SKY130 model library.
+* A **yellow highlighted box** confirms successful inclusion of the SKY130 model library.
 * A **yellow indicator** shows the selected process corner.
 
 ### Process Corner Codes
@@ -706,6 +719,10 @@ ngspice day1_nfet_idvds_L2_W5.spice
 plot -vddbranch
 ```
 
+
+<img width="1565" height="812" alt="Screenshot 2026-02-23 121048" src="https://github.com/user-attachments/assets/4a12e6bb-39b8-4d76-bb1a-259c2549853f" />
+
+
 * This produces the **Id–Vds curves** for multiple VGS values.
 
 
@@ -722,6 +739,8 @@ plot -vddbranch
   * Short-channel effects
   * Non-ideal behavior becomes dominant
 * The response gradually shifts away from ideal square-law behavior.
+
+<img width="1819" height="902" alt="Screenshot 2026-02-23 121120" src="https://github.com/user-attachments/assets/c5c971ba-f206-40bf-9c7a-69e0c80d309d" />
 
 
 ## Reading Current Values
