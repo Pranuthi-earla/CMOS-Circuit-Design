@@ -329,3 +329,465 @@ SPICE Netlist:
 -	Even though no steady current enters the MOSFET gate, its internal capacitance allows brief surges when turning on or off. Because of this, a sudden spike might appear. That's where the resistor helps - it shields both the delicate oxide layer and whatever powers the switch. Without it, stress builds fast.
 
 ### 11-Lecture 2: Circuit description in SPICE syntax
+
+**1. Analyze and Note All Parameter Values**
+
+Before writing a SPICE netlist, identify and record all required parameters, such as:
+
+- Supply voltages
+
+- Resistance values
+
+- Transistor dimensions (Width W and Length L)
+
+- Device model names from the technology file
+
+**2. Defining the Nodes**
+
+- Each circuit component connects between two points, known as nodes.
+
+- Components are always connected from one node to another, never fewer.
+
+- The entire circuit network is formed by elements spanning these nodes.
+
+- A point where multiple components connect is considered a node.
+
+- Every node must be assigned a unique name in the SPICE description.
+
+- Even if a junction seems insignificant, it must still be labeled.
+
+**3. Naming the Nodes**
+
+- Node names are usually alphanumeric (e.g., vdd, n1, in).
+
+- Ground is always represented by node 0 in SPICE.
+
+- Meaningful node names improve circuit readability and debugging.
+
+**4. Defining the SPICE Netlist**
+
+NMOS Transistor Example
+
+The NMOS transistor M1 is connected between the supply and ground with specified channel dimensions.
+
+M1 vdd n1 0 0 nmos W=1.8u L=1.2u
+Parameter Description
+
+- M1-MOSFET instance name
+
+- vdd-Drain node
+
+- n1-Gate node
+
+- 0-Source node (ground)
+
+- 0-Body node (ground)
+
+- nmos-Model name (from technology file)
+
+- W=1.8u-Channel width
+
+- L=1.2u-Channel length
+
+**Common MOSFET Terminal Order in SPICE**
+
+Drain – Gate – Source – Body – Model – Dimensions
+
+Complete SPICE Netlist Example
+
+M1  vdd  n1  0  0  nmos  W=1.8u  L=1.2u
+
+R1  in   n1  55
+
+Vdd vdd  0   2.5
+
+Vin in   0   2.5
+
+### 12-Lecture 3: Define technology parameters
+
+The NMOS model is defined inside a technology (tech) file, which contains key physical and electrical parameters such as:
+
+- Threshold voltage (VTH0 / VTO)
+
+- Transconductance parameter (kn′)
+
+- Body effect coefficient (γ)
+
+- Channel length modulation (λ)
+
+- Using these parameters, SPICE predicts transistor behavior under different voltage conditions.
+
+Impact of Technology Scaling
+
+- As technology nodes shrink, accurate parameter extraction becomes increasingly critical.
+
+- Short-channel effects grow stronger and can no longer be neglected.
+
+- Effects that were once minor now significantly influence:
+
+     - Device performance
+
+     - Leakage currents
+
+     - Threshold voltage behavior
+
+- Precision in modeling is no longer optional—it is required due to scaling limits.
+
+- Even small parameter inaccuracies can lead to noticeable deviations in simulation results.
+
+Model Name Matching Requirement
+
+- The model name used in the MOSFET netlist entry must exactly match the name defined in the model declaration.
+
+- SPICE requires character-for-character equivalence:
+
+   - Same spelling
+
+   - Same case
+
+   - No extra spaces or syntax variations
+
+- There is no automatic correction for mismatches or typographical errors.
+
+- Any inconsistency prevents proper model recognition.
+
+Example
+
+M1 vdd n1 0 0 nmos W=1.8u L=1.2u
+
+.MODEL nmos NMOS ( ... )
+
+Consequences of Model Mismatch
+
+- Incorrect transistor type selection (NMOS vs PMOS) or parameter mismatch may:
+
+   - Cause SPICE to reject the netlist
+
+   - Produce incorrect or misleading simulation results
+
+- Simulation integrity silently degrades if parameters drift from intended values.
+
+Common MOSFET Model Parameters
+
+- nmos → Model name (must match the netlist entry)
+
+- NMOS → Device type
+
+- TOX → Oxide thickness
+
+- VTH0 → Zero-bias threshold voltage
+
+- U0 → Carrier mobility
+
+- GAMMA1 → Body effect coefficient
+
+Technology Model Library File
+
+- NMOS and PMOS models are defined inside a model library file, for example:
+
+xxxx_025um_model.mod
+
+- This file contains all technology-specific parameters under a defined library.
+
+- The technology node is typically inferred from the filename rather than explicitly stated.
+
+Linking the Model File to the Netlist
+
+- The technology model file is included in the main netlist using a library reference command.
+
+- This command specifies:
+
+    - The file path
+
+    - The model definitions to be used
+
+- Once included, the circuit netlist becomes linked to the technology parameters.
+
+Device Characterization
+
+- After linking the model file:
+
+   - Sweeping VGS and VDS reveals device characteristics
+
+   - DC analysis exposes transistor behavior across operating regions
+
+- These simulations help validate:
+
+   - Model accuracy
+
+   - Device performance trends
+
+### 13-Lecture 4: First SPICE simulation
+
+
+**Environment Setup**
+
+1. **Open VirtualBox**
+
+   * Launch the virtual machine configured for SKY130 simulations.
+
+2. **Clone the Workshop Repository**
+
+   ```bash
+   git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git
+   ```
+
+3. **Verify Project Directory**
+
+   * After cloning, a folder named `sky130CircuitDesignWorkshop` appears.
+   * This directory contains all configuration-generated project files.
+
+
+ Navigating the Design Files
+
+4. **Move to the Design Directory**
+
+   ```bash
+   cd sky130CircuitDesignWorkshop/design/
+   ```
+
+5. **List Contents**
+
+   ```bash
+   ls
+   ```
+
+6. **Explore the SKY130 Primitive Library**
+
+   ```bash
+   cd sky130_fd_pr/
+   ls
+   ```
+
+7. **Enter the Cells Directory**
+
+   ```bash
+   cd cells/
+   ```
+
+   Two folders appear:
+
+   * `nfet_01v8` → NMOS devices
+   * `pfet_01v8` → PMOS devices
+
+
+ Understanding Process Corners
+
+8. **Inspect NMOS Libraries**
+
+   ```bash
+   cd nfet_01v8/
+   ls
+   ```
+
+   You will find multiple files corresponding to different **process corners**:
+
+   * **TT** → Typical–Typical
+   * **FF** → Fast–Fast
+   * **SS** → Slow–Slow
+
+   Each file models transistor behavior under different fabrication and electrical variations.
+
+Viewing the NMOS Model File
+
+9. **Open the TT Corner Model**
+
+   ```bash
+   less sky130_fd_pr__nfet_01v8___tt.pm3.spice
+   ```
+
+   * This file contains **all NMOS parameters** for the typical process corner.
+   * It defines how the device behaves under nominal conditions.
+
+   **Exit the file** by pressing:
+
+   ```text
+   q
+   ```
+
+10. **Check Allowed Dimensions**
+
+* Open:
+
+  ```
+  sky130_fd_pr__nfet_01v8___tt.corner.spice
+  ```
+* Only specific **W (width)** and **L (length)** values are allowed.
+* Using dimensions outside this list may cause simulation failure.
+
+
+Model Library Overview
+
+11. **Navigate to the Models Directory**
+
+```bash
+cd ../../models
+```
+
+12. **Locate the Master Library**
+
+```bash
+ls
+```
+
+* `sky130.lib.spice` contains **all NMOS and PMOS models** across corners.
+
+ Running the Simulation
+
+13. **Return to the Design Directory**
+
+```bash
+cd ../design
+```
+
+14. **Open the Simulation File**
+
+```bash
+vim day1_nfet_idvds_L2_W5.spice
+```
+
+* This file is preconfigured for repeated simulations.
+
+
+## Library Linking and Corner Selection
+
+* A **green highlighted box** confirms successful inclusion of the SKY130 model library.
+* A **yellow indicator** shows the selected process corner.
+
+### Process Corner Codes
+
+* `tt` → Typical–Typical
+* `ff` → Fast–Fast
+* `ss` → Slow–Slow
+* `sf` → Slow–Fast
+
+---
+
+## Netlist Description
+
+```spice
+XM1 Vdd n1 0 0 sky130_fd_pr__nfet_01v8 w=5 l=2
+R1  n1 in 55
+Vdd Vdd 0 1.8
+Vin in  0 1.8
+```
+
+### Notes
+
+* NMOS model used: `sky130_fd_pr__nfet_01v8`
+* W = 5 µm, L = 2 µm are **selected directly from the corner file**
+* Supply voltage = **1.8 V**, matching the device rating
+
+
+## DC Simulation Command
+
+```spice
+.dc Vdd 0 1.8 0.1 Vin 0 1.8 0.2
+```
+
+### Sweep Description
+
+* **VDS**: 0 → 1.8 V in steps of 0.1 V
+* **VGS**: 0 → 1.8 V in steps of 0.2 V
+
+
+
+## Running ngspice
+
+15. **Execute the Simulation**
+
+```bash
+ngspice day1_nfet_idvds_L2_W5.spice
+```
+
+16. **Plot Drain Current**
+
+```spice
+plot -vddbranch
+```
+
+* This produces the **Id–Vds curves** for multiple VGS values.
+
+
+
+## Observations from the Plot
+
+* When **VGS slightly exceeds Vt**, drain current increases roughly as:
+  [
+  I_D \propto (V_{GS} - V_t)^2
+  ]
+* At higher VGS:
+
+  * Mobility degradation
+  * Short-channel effects
+  * Non-ideal behavior becomes dominant
+* The response gradually shifts away from ideal square-law behavior.
+
+
+## Reading Current Values
+
+* Click anywhere on the plot:
+
+  * The terminal displays numerical values
+  * The vertical coordinate represents **drain current (Id)** at that operating point
+
+---
+
+### 14-Lecture 5 :SPICE Lab with sky130 models
+
+
+1. Navigate to the models directory:
+
+   ```bash
+   cd models
+   ```
+
+2. Open the SKY130 library file:
+
+   ```bash
+   vim sky130.lib.spice
+   ```
+
+   * This file references all NMOS and PMOS device models used during simulation.
+
+
+Understanding Parameter Dimensions and Scaling
+
+* The `all.spice` file defines how parameter dimensions are interpreted.
+* Information about how large or small each parameter is intended to be appears directly inside this file.
+* The measurement system and scaling rules for dimensions such as width, length, and other model parameters are specified here.
+* To correctly interpret simulation results:
+
+  * Always consult `all.spice`
+  * Do not rely on assumptions or external references
+* Proper understanding of device size and scaling begins only from `all.spice`.
+
+
+ Cut-Off Region Analysis
+
+* At a low gate-to-source voltage:
+
+  ```
+  VGS = 0.4 V
+  ```
+
+  a very small drain current is observed.
+
+Explanation
+
+* The transistor is operating in the cut-off region.
+* In this region:
+
+  * ( V_{GS} < V_t )
+  * The channel is not fully formed
+  * Only leakage or sub-threshold current flows
+
+* For the transistor to turn ON, VGS must be equal to or greater than the threshold voltage (Vt).
+* Since this condition is not satisfied, the device remains mostly OFF and conducts only a minimal current despite being powered.
+
+---
+
+
+
+
+
