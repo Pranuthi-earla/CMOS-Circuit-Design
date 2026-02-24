@@ -1,5 +1,5 @@
 # CMOS Circuit Design and SPICE Simulations using Sky130
-## Module 1: Basics of NMOS Drain current(Id) vs Drain to source voltage(Vds)
+## Day 1: Basics of NMOS Drain current(Id) vs Drain to source voltage(Vds)
 
 ##  Introduction to Circuit Design and SPICE simulations
 ### Lecture 1 : Why do we need SPICE simulations?
@@ -772,57 +772,94 @@ plot -vddbranch
 
 ### 14-Lecture 5 :SPICE Lab with sky130 models
 
+- Open sky130.lib.spice from the models directory.
 
-1. Navigate to the models directory:
+- Parameter scaling is defined in the all.spice file.
 
-   ```bash
-   cd models
-   ```
+- Device dimensions must follow the scale specified in all.spice.
 
-2. Open the SKY130 library file:
+Cut-Off Region
 
-   ```bash
-   vim sky130.lib.spice
-   ```
+- At VGS = 0.4 V, drain current is very small.
 
-   * This file references all NMOS and PMOS device models used during simulation.
+- When VGS < Vt, the transistor operates in cut-off.
 
+- In cut-off, the device is mostly OFF with negligible current.
 
-Understanding Parameter Dimensions and Scaling
+## Day 2: Velocity saturation and basics of CMOS inverter VTC
 
-* The `all.spice` file defines how parameter dimensions are interpreted.
-* Information about how large or small each parameter is intended to be appears directly inside this file.
-* The measurement system and scaling rules for dimensions such as width, length, and other model parameters are specified here.
-* To correctly interpret simulation results:
+### SPICE simulation for lower nodes and velocity saturation effect
 
-  * Always consult `all.spice`
-  * Do not rely on assumptions or external references
-* Proper understanding of device size and scaling begins only from `all.spice`.
+#### 15-L1 SPICE simulation for lower nodes
 
+- Initial device has a fixed W/L ratio ≈ 2.5.
 
- Cut-Off Region Analysis
+- Below the blue boundary, MOSFET operates in the linear (resistive) region where drain current increases with voltage.
 
-* At a low gate-to-source voltage:
+- Above the blue boundary, device enters saturation; current nearly stabilizes due to channel pinch-off.
 
-  ```
-  VGS = 0.4 V
-  ```
+- Channel-length modulation causes a slight rise in current in saturation.
 
-  a very small drain current is observed.
+Device Dimensions Used
 
-Explanation
+- Case 1: W = 0.375u, L = 0.25u
 
-* The transistor is operating in the cut-off region.
-* In this region:
+- Case 2: W = 1.8u, L = 1.2u
 
-  * ( V_{GS} < V_t )
-  * The channel is not fully formed
-  * Only leakage or sub-threshold current flows
+Scaling Observation
 
-* For the transistor to turn ON, VGS must be equal to or greater than the threshold voltage (Vt).
-* Since this condition is not satisfied, the device remains mostly OFF and conducts only a minimal current despite being powered.
+- When W and L are scaled proportionally, ideal theory predicts similar drain current.
+
+- In practice, drain current changes due to:
+
+   - Mobility degradation
+ 
+   - Channel length variation
+
+   - Parasitic resistance
+
+   - Short-channel effects
+
+SPICE Deck Update
+
+- Only W and L values are modified.
+
+- All other parameters remain unchanged.
+
+- Focus of simulation is strictly on dimension scaling effects.
 
 ---
+
+## Lecture 2: Id–Vgs Behavior (Long vs Short Channel)
+
+Long-Channel Device
+* Dimensions: `W = 1.8u`, `L = 1.2u`
+* Drain current follows **square-law behavior**:
+
+  * ( I_D \propto (V_{GS} - V_t)^2 )
+* Just above threshold, current increases slowly.
+* At higher VGS, Id rises sharply (nonlinear).
+
+ Short-Channel Device
+* Dimensions: `W = 0.375u`, `L = 0.25u`
+* Drain current shows **near-linear dependence** on ( V_{GS} - V_t ).
+* Deviation from square law due to **velocity saturation**.
+* Carrier velocity reaches a limit even as electric field increases.
+
+Velocity Saturation Effect
+
+* High electric field causes carrier speed to **saturate**.
+* Further increase in field does not increase velocity.
+* This changes Id–Vgs behavior from quadratic to linear.
+
+Observation from Id–Vgs Plot
+
+* Long-channel: curved (quadratic) response.
+* Short-channel: straighter (linear) response.
+* Scaling channel length significantly alters current behavior.
+
+---
+
 
 
 
