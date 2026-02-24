@@ -788,11 +788,16 @@ Cut-Off Region
 
 ## Day 2: Velocity saturation and basics of CMOS inverter VTC
 
-### SPICE simulation for lower nodes and velocity saturation effect
+ ### SPICE simulation for lower nodes and velocity saturation effect
 
-#### 15-L1 SPICE simulation for lower nodes
+ #### 15-Lecture 1: SPICE simulation for lower nodes
 
-- Initial device has a fixed W/L ratio ≈ 2.5.
+<img width="747" height="555" alt="Screenshot 2026-02-24 151924" src="https://github.com/user-attachments/assets/ffebe4b5-c847-406b-af46-f3987a402421" />
+
+
+- Initial device has a fixed W/L ratio ≈ 1.5 (W=1.8u, L=1.2u) 
+
+<img width="792" height="482" alt="image" src="https://github.com/user-attachments/assets/65f45183-3fed-4af4-baa5-859d0477058a" />
 
 - Below the blue boundary, MOSFET operates in the linear (resistive) region where drain current increases with voltage.
 
@@ -804,7 +809,13 @@ Device Dimensions Used
 
 - Case 1: W = 0.375u, L = 0.25u
 
-- Case 2: W = 1.8u, L = 1.2u
+<img width="330" height="177" alt="Screenshot 2026-02-24 152814" src="https://github.com/user-attachments/assets/a232477d-e684-4365-99b3-3aa41b3fa45b" />
+
+Plot:
+
+<img width="532" height="408" alt="image" src="https://github.com/user-attachments/assets/878f2e32-518e-401e-ad63-2186cc195000" />
+
+
 
 Scaling Observation
 
@@ -819,49 +830,62 @@ Scaling Observation
    - Parasitic resistance
 
    - Short-channel effects
+   
+<img width="902" height="490" alt="image" src="https://github.com/user-attachments/assets/71381295-0b39-4b32-86d1-6d48b5cbb375" />
 
-SPICE Deck Update
-
-- Only W and L values are modified.
-
-- All other parameters remain unchanged.
-
-- Focus of simulation is strictly on dimension scaling effects.
 
 ---
 
 ## Lecture 2: Id–Vgs Behavior (Long vs Short Channel)
 
-Long-Channel Device
-* Dimensions: `W = 1.8u`, `L = 1.2u`
-* Drain current follows **square-law behavior**:
+Long-Channel Device Device dimensions
+-	W = 1.8 µm
+-	L = 1.2 µm
+-	
+At VDS = 2.5 V, the drain current shows quadratic dependence on gate voltage.
+Observed values
 
-  * ( I_D \propto (V_{GS} - V_t)^2 )
-* Just above threshold, current increases slowly.
-* At higher VGS, Id rises sharply (nonlinear).
+-	VGS = 0 V → ID = 0
+-	VGS = 0.5 V → ID ≈ 10 µA
+-	VGS = 1 V → ID ≈ 40 µA
+  
+This behavior follows the saturation-region equation:
 
- Short-Channel Device
-* Dimensions: `W = 0.375u`, `L = 0.25u`
-* Drain current shows **near-linear dependence** on ( V_{GS} - V_t ).
-* Deviation from square law due to **velocity saturation**.
-* Carrier velocity reaches a limit even as electric field increases.
-
-Velocity Saturation Effect
-
-* High electric field causes carrier speed to **saturate**.
-* Further increase in field does not increase velocity.
-* This changes Id–Vgs behavior from quadratic to linear.
-
-Observation from Id–Vgs Plot
-
-* Long-channel: curved (quadratic) response.
-* Short-channel: straighter (linear) response.
-* Scaling channel length significantly alters current behavior.
-
----
+- <img width="218" height="75" alt="Screenshot 2026-02-24 161749" src="https://github.com/user-attachments/assets/c3080270-49f2-45ed-8609-61a1c4fab101" />
 
 
+<img width="428" height="350" alt="image" src="https://github.com/user-attachments/assets/e066881f-5576-4a8a-b40d-6d4cc96d148c" />
 
+SPICE Simulation Results (Long Channel)
+
+<img width="500" height="250" alt="Screenshot 2026-02-24 154535" src="https://github.com/user-attachments/assets/a094950c-ccb4-4888-a1c0-8a84a093ecc3" />
+
+
+<img width="554" height="448" alt="Screenshot 2026-02-24 160129" src="https://github.com/user-attachments/assets/3ad74cfd-52e4-4675-a3a0-3ba136088934" />
+
+
+Short-Channel Device
+For short-channel devices, Id initially follows the same trend of quadratic but then becomes linear at higher VGS.
+Observed behavior
+
+-	VGS = 0.5 V → ID ≈ 10 µA
+-	VGS = 1 V → ID ≈ 40 µA
+-	Up to this point, behavior appears quadratic
+-	At higher VGS, Id shifts toward linear dependence
+
+<img width="446" height="386" alt="image" src="https://github.com/user-attachments/assets/76d2b67d-5be8-4fc3-b2b2-b84231dd5156" />
+
+
+This deviation is the key difference between short- and long-channel devices due to Velocity Saturation
+
+SPICE Simulation: Id vs Vgs (VDS Constant)
+The following plots show Id vs Vgs for different gate voltages while keeping VDS constant.
+
+
+<img width="500" height="250" alt="Screenshot 2026-02-24 160231" src="https://github.com/user-attachments/assets/9b9717e9-42ef-4f98-818d-c7d76e7c9f0d" />
+
+
+<img width="522" height="408" alt="image" src="https://github.com/user-attachments/assets/de5c9f8b-de9f-4bc6-bdfd-48e9ef5ecccd" />
 
 
 
