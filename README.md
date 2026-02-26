@@ -1209,6 +1209,11 @@ Fall Delay
 
 ### 31-Lecture 2: Analytical expression of Vm as a function of (W/L)n and (W/L)p
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b20cb75e-56fc-4a9c-a029-0ab5fc215203" width="49%" />
+  <img src="https://github.com/user-attachments/assets/0d55a869-fbe2-415e-a843-d2104b70cc4b" width="49%" />
+</p>
+
 -	Vm depends directly on the ratio ((Wp/Lp)/(Wn/Ln)), which sets the relative drive strength of PMOS and NMOS.
 -	Increasing PMOS width shifts Vm upward, moving it closer to VDD.
 -	Increasing NMOS width shifts Vm downward, moving it closer to GND.
@@ -1217,17 +1222,28 @@ Fall Delay
 
 ### 32-Lecture 3: Analytical expression of (W/L)n and (W/L)p as a function of Vm
 -	In the switching-point equation, all parameters except Vm are fixed by the technology model (k′n, k′p, Vtn, |Vtp|, VDD), making Vm the only variable that changes with sizing.
+  <img width="710" height="295" alt="image" src="https://github.com/user-attachments/assets/8546b170-4968-4e3e-93b9-36c9986cd7b9" />
+---
+<img width="336" height="100" alt="image" src="https://github.com/user-attachments/assets/cb981c38-e3ea-45f2-b3ac-f23018e0324f" />
+<img width="411" height="81" alt="image" src="https://github.com/user-attachments/assets/dc2f4e68-a081-4455-aac9-b5bf635ef0f7" />
+
 -	Once Vm is obtained from the VTC plot, the required ratio ((W/L)_p / (W/L)_n) can be directly calculated from the equation.
 -	The switching point represents the balance of drive strengths between PMOS and NMOS; the transition occurs when one device begins to dominate the other.
 -	This tipping point is fully determined by the relative strength ratio, clearly marking where control shifts from one transistor to the other.
 -	When Vm is close to (VDD/2), PMOS and NMOS have equal strength.
 -	When Vm shifts toward 0 V, NMOS drive strength dominates.
 -	When Vm shifts toward VDD, PMOS drive strength dominates.
+  
+<img width="636" height="292" alt="image" src="https://github.com/user-attachments/assets/b76cccc0-137c-413c-ab73-11ff6dddacb1" />
 
 ### 33-Lecture 4: Static and dynamic simulation of CMOS inverter
+<img width="292" height="212" alt="image" src="https://github.com/user-attachments/assets/ebb73481-d872-44e6-a029-54076e40ed89" />
 
 -	The behavior of a CMOS inverter varies with different PMOS-to-NMOS size ratios ((Wp/Lp):(Wn/Ln)).
 -	Multiple sizing cases are analyzed by progressively changing the (Wp/Lp) to (Wn/Ln) ratio to observe inverter performance trends.
+
+<img width="522" height="405" alt="image" src="https://github.com/user-attachments/assets/1720dc89-8414-43af-9c4a-51ed98b55777" />
+
 Case 1: (Wp/Lp = Wn/Ln = 0.7,\mu m / 1.5,\mu m)
 DC Analysis
 -	The switching threshold voltage is approximately 0.83 V, indicating balanced PMOS and NMOS strengths.
@@ -1235,18 +1251,40 @@ Transient Analysis
 -	For the rising edge, the delay difference is 0.381 ns, calculated from (2.533,ns - 2.152,ns), showing a later output transition.
 -	For the falling edge, the delay is 0.1597 ns, obtained from (4.2104,ns - 4.0507,ns), indicating a faster discharge path.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/01b40316-38a4-4fbb-b8d2-2f5c2f77b12c" width="32%" />
+  <img src="https://github.com/user-attachments/assets/c93df25f-ca18-4593-8714-13c354a9df16" width="32%" />
+  <img src="https://github.com/user-attachments/assets/b3fc36bc-6570-45a6-9e8e-257bd281a4f9" width="32%" />
+</p>
+
+Rise Delay = 1.16277-1.01446 = 148ps
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/11216872-6323-4b48-9b0a-7f0c0bc2c6c9" width="24%" />
+  <img src="https://github.com/user-attachments/assets/70d36ee8-5933-4ced-935b-cc784b8f53bc" width="24%" />
+  <img src="https://github.com/user-attachments/assets/193292de-7bbc-4964-90a8-795acb3a5220" width="24%" />
+  <img src="https://github.com/user-attachments/assets/ff997b76-9575-4197-81c7-529f12b003a6" width="24%" />
+</p>
+
+Fall Delay = 2.07653-2.00486 = 716ps
 
 ### 34-L5 Static and dynamic simulation of CMOS inverter with increased PMOS width
+Case 1:
+<img width="861" height="458" alt="image" src="https://github.com/user-attachments/assets/db37a2e9-8af0-4374-a135-3afbd99eba55" />
 
 Case 2: (Wp/Lp = 2 \times (Wn/Ln))
 Parameters
 -	(Wn/Ln = 0.7,\mu m / 0.15,\mu m)
 -	(Wp/Lp = 1.4,\mu m / 0.15,\mu m)
 DC Analysis
+<img width="530" height="405" alt="image" src="https://github.com/user-attachments/assets/31ed83ea-4c14-4dc9-9a45-45c741c6581e" />
+
 -	Switching threshold voltage ≈ 0.87 V
 Transient Analysis
 -	Rising edge delay increases by 0.2 ns (2.35 ns − 2.15 ns).
 -	Falling edge delay increases by 0.1602 ns (4.2127 ns − 4.0525 ns).
+<img width="852" height="368" alt="image" src="https://github.com/user-attachments/assets/87af03f9-1f96-4621-ac15-e3f7f4a0a3c4" />
 
 Case 3: (Wp/Lp = 3 \times (Wn/Ln))
 Parameters
@@ -1260,20 +1298,38 @@ Transient Analysis
 -	Increasing PMOS width shifts the switching point Vm upward due to stronger pull-up action relative to NMOS.
 -	A stronger PMOS requires higher input voltage to balance NMOS current, moving Vm closer to VDD.
 -	Larger PMOS width reduces rise delay by supplying more charging current, allowing the load capacitance to reach high voltage faster.
+<img width="861" height="376" alt="image" src="https://github.com/user-attachments/assets/f76c4d4c-4099-4f5f-bf23-6fe017cb6a0d" />
+
+ Case 4:
+ <img width="847" height="367" alt="image" src="https://github.com/user-attachments/assets/53a49802-7b42-4e6b-89f7-d0023abed62f" />
+
+ Case 5:
+<img width="841" height="382" alt="image" src="https://github.com/user-attachments/assets/97e5faac-5c05-4659-b8b3-a4da92101a16" />
 
 
 ### 35-L6 Applications of CMOS inverter in clock network and STA
+
+<img width="836" height="203" alt="image" src="https://github.com/user-attachments/assets/a79511b7-5fb7-4349-b940-6a1560e2a100" />
+
 
 -	During fabrication, small variations in transistor W/L ratios occur, but CMOS inverters tolerate these well, keeping the switching point largely stable.
 -	Vm remains consistent under minor variations and shifts noticeably only when there is a strong imbalance between PMOS and NMOS strengths.
 -	When PMOS width is set to about twice NMOS width, rise and fall times closely match, compensating for lower hole mobility in PMOS devices.
 -	Matching rise and fall delays improves timing consistency, reduces duty-cycle distortion, and ensures symmetric signal transitions across loads.
 -	This balanced behavior highlights the inherent symmetry of CMOS inverters, which supports their reliability and scalability in large designs.
+-	
+  <img width="882" height="502" alt="image" src="https://github.com/user-attachments/assets/a919d86a-6b3d-4e44-9362-a73c31f380d6" />
+
 -	Clock inverters and buffers are primarily designed to achieve balanced propagation delays, where (tpHL \approx tpLH).
 -	Timing mismatches cause asymmetric clock waveforms, leading to uneven pulse widths and reduced timing margins at storage elements.
 -	In buffer chains, small rise/fall mismatches accumulate stage by stage, increasing clock skew and complicating timing closure.
 -	If rise delay (tpLH) becomes the critical timing limiter, optimization focuses specifically on improving the rising transition.
 -	Increasing PMOS width selectively reduces rise delay, ensuring the clock edge arrives early enough to meet setup timing without unnecessary redesign.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f56a58e4-d508-4450-b459-a87e78392ce2" width="49%" />
+  <img src="https://github.com/user-attachments/assets/2e78da08-df56-476c-b72c-c3660af66410" width="49%" />
+</p>
 
 ---
 ## Day4- CMOS Noise Margin robustness evaluation
@@ -1287,6 +1343,9 @@ Transient Analysis
 -	In an ideal inverter, the transition between logic levels is perfectly sharp, switching instantaneously at a single threshold with no gradual transition region.
 -	In real CMOS circuits, parasitic resistance and capacitance slow voltage transitions, producing a gradual slope in the voltage transfer curve near the switching point.
 -	Around the switching voltage (Vm), limited gain makes the inverter highly sensitive to input noise, where small voltage variations can cause large output changes.
+
+
+<img width="543" height="390" alt="image" src="https://github.com/user-attachments/assets/622a0d66-e101-4265-b5cc-bd78c9e935e8" />
 
 Voltage Margin Definitions
 -	VIL (Input Low Voltage):
@@ -1307,6 +1366,8 @@ Output voltages between 0 and VOL represent logic 0, ensuring a clear low-level 
 -	In the transition region, the curve’s slope magnitude exceeds unity, amplifying signal changes and enabling switching.
 -	Outside this region, the slope drops below unity, stabilizing output levels and preventing noise-induced state changes.
 
+
+<img width="526" height="390" alt="image" src="https://github.com/user-attachments/assets/786cf9b6-1446-4b05-97c3-65993f42f6d9" />
 
 ### 38-Lecture 3: Noise Margin Equation and Summary
 
