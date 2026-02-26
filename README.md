@@ -1238,7 +1238,7 @@ Transient Analysis
 -	If rise delay (tpLH) becomes the critical timing limiter, optimization focuses specifically on improving the rising transition.
 -	Increasing PMOS width selectively reduces rise delay, ensuring the clock edge arrives early enough to meet setup timing without unnecessary redesign.
 
-  
+---
 ## Day4- CMOS Noise Margin robustness evaluation
 
 ## Static behaviour evaluation-CMOS inverter robustness-Noise Margin
@@ -1271,8 +1271,6 @@ Output voltages between 0 and VOL represent logic 0, ensuring a clear low-level 
 -	Outside this region, the slope drops below unity, stabilizing output levels and preventing noise-induced state changes.
 
 
----
-
 ### 38-Lecture 3: Noise Margin Equation and Summary
 
 - **Noise Margin Low (NML):**
@@ -1284,6 +1282,7 @@ Output voltages between 0 and VOL represent logic 0, ensuring a clear low-level 
 - When voltages move above **VIL** or below **VIH**, they enter an undefined transition region where signals are neither clearly low nor high, resulting in uncertain behavior.
 
 - Voltages outside the defined **NML** and **NMH** limits fall beyond safe operating bounds, increasing the risk of incorrect switching and malfunction.
+<img width="675" height="498" alt="image" src="https://github.com/user-attachments/assets/f8f737a1-7c94-435c-8438-e55106772094" />
 
 
 Noise Impact Scenarios
@@ -1295,6 +1294,8 @@ Noise Impact Scenarios
 - If noise pushes the voltage into the undefined region between **VIL** and **VIH**, the inverter may behave unpredictably, leading to unreliable output.
 
 - If a noise spike drives the voltage into the **NMH** region, false triggering can occur, causing unintended logic transitions and timing failures.
+<img width="592" height="317" alt="image" src="https://github.com/user-attachments/assets/f270891c-73a8-4d6c-ad5e-929348df011d" />
+
 
 ### 39-Lecture 4: Noise margin variation with respect to PMOS width
 
