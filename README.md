@@ -1120,21 +1120,37 @@ Simulation Setup
 ### 29-L3 Labs Sky130 SPICE simulation for CMOS
 
  VTC Characteristics
+ 
+<img width="432" height="412" alt="image" src="https://github.com/user-attachments/assets/b3e9ff66-0127-41d2-8239-c56afd502f3f" />
 
 * The CMOS inverter consists of one PMOS and one NMOS transistor, with the PMOS W/L ≈ 2.33× NMOS W/L
 
 * Vin is swept from 0 V to 1.8 V in 0.01 V increments, and Vout is recorded at each step to generate the VTC.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4e951d19-b539-4f61-a782-af88f22a0280" width="48%" />
+  <img src="https://github.com/user-attachments/assets/7a5ec1b9-af2c-4834-a31e-c1c810dc4a75" width="48%" />
+</p>
+
 * The switching threshold (Vm) is identified where Vin = Vout on the ngspice plot.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3632869c-bb24-4b3a-9080-271bd66aa1ef" width="49%" />
+  <img src="https://github.com/user-attachments/assets/209391d3-55b9-485d-acdd-abf8eb8c7bde" width="49%" />
+</p>
+
 
 * This intersection point clearly marks the inverter’s operating midpoint.
 
 * At a W/L ratio ≈ 2.3 the measured switching voltage is approximately 0.876 V.
 
 * Fine cursor movement on the plot is achieved by pressing and holding the right mouse button
+  
+<img width="357" height="173" alt="image" src="https://github.com/user-attachments/assets/58d76f5f-6a65-4f53-9909-f95c753029e8" />
 
 
 Transient Analysis
+
 
 * Transient behavior is analyzed using the Day-3 transient SPICE file
 
@@ -1144,11 +1160,26 @@ Transient Analysis
   * Fall time = 0.1 ns
   * Pulse width = 2 ns
   * Period = 4 ns
+    
+Rise Delay
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6507ce69-ff47-4d59-b2aa-5e40964093b2" width="48%" />
+  <img src="https://github.com/user-attachments/assets/38fefcac-057f-4064-b379-1fd4a1ab939a" width="48%" />
+</p>
+<img width="177" height="70" alt="image" src="https://github.com/user-attachments/assets/477cb983-2e43-4aba-847f-318e9dadd86f" />
 
 * The reference point for delay measurement is 50% of output voltage (≈ 0.9 V)
 
 * Delay is measured as the time difference between the input transition and the output reaching the mid-level.
   
+Fall Delay
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/caca8f7e-ef4b-4b4b-b21f-4f3b486bcd41" width="48%" />
+  <img src="https://github.com/user-attachments/assets/65d764ec-53bc-46bb-bddd-d3dff7363dd5" width="48%" />
+</p>
+
+<img width="178" height="70" alt="image" src="https://github.com/user-attachments/assets/1de0639e-c4ab-4508-ac0b-72b28ff0b5b6" />
+
  Delay Results
 
 * Rise delay =  2.482 - 2.15 = 0.333ns
@@ -1164,11 +1195,17 @@ Transient Analysis
 -	Changing PMOS and NMOS W/L ratios does not alter the overall voltage transfer curve shape; only the switching point shifts due to drive-strength imbalance between the transistors.
 -	Despite sizing variations, the CMOS inverter preserves full output swing, sharp transition, and stable saturation regions, showing strong robustness to design changes.
 -	Initially, both Wn/Ln and Wp/Lp are set to 1.5, then uniformly scaled by a factor of 1.5 to reach a value of 3.75 for both transistors.
+  <img width="918" height="387" alt="image" src="https://github.com/user-attachments/assets/0f74dfd8-6b2a-4cea-97a7-007b82476c88" />
+
 -	In the next sizing step, widths are adjusted independently: Wn becomes 0.375 µm and Wp becomes 0.9375 µm, while both channel lengths remain fixed at 0.25 µm.
 -	The switching threshold voltage (Vm) occurs when the input voltage equals the output voltage, defining the exact point where the inverter changes logic state.
 -	Vm is identified graphically at the intersection of the voltage transfer curve with the 45° line (Vin = Vout), marking the midpoint of the transition region.
+  <img width="815" height="432" alt="image" src="https://github.com/user-attachments/assets/93f0553b-dcf6-422e-a4e5-ce4d21869c7a" />
+
 -	At Vm, both NMOS and PMOS operate in saturation, conducting simultaneously and creating a temporary direct path between VDD and GND.
 -	From the plots, Vm is approximately 0.9 V when Wn/Ln equals Wp/Lp, and shifts toward 1.2 V when the PMOS is made wider, confirming sizing-dependent threshold movement.
+  <img width="805" height="433" alt="image" src="https://github.com/user-attachments/assets/293280a2-601a-4cbc-9809-659558f2c863" />
+
 
 ### 31-Lecture 2: Analytical expression of Vm as a function of (W/L)n and (W/L)p
 
